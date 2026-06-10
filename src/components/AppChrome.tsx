@@ -2,29 +2,53 @@ import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 export default function AppChrome() {
-  const [toggleState, setToggleState] = useState(false)
-  const handleToggle = () => {
-    setToggleState((prev) => !prev)
-  }
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const optionsList =[
+    {
+      linkTo : "/",
+      linkText : "Home"
+    },
+        {
+      linkTo : "/posts",
+      linkText : "posts"
+    },
+    {
+      linkTo : "/about",
+      linkText : "About"
+    },
+    {
+      linkTo : "/resume",
+      linkText : "Resume"
+    }
+  ]
   return (
-    <div className="flex min-h-screen bg-blue-50">
-
-      {toggleState &&
-        <nav className="flex flex-col w-64 p-4 gap-4 bg-orange-800 text-white">
-          <Link to="/" className="hover:text-blue-500">Home</Link>
-          <Link to="/about" className="hover:text-blue-500">About</Link>
+    <div className="flex min-h-screen bg-background text-text">
+      {isSidebarOpen && (
+        <nav className="w-56 bg-sidebar border-r border-zinc-200 pt-16">
+          <div className="flex flex-col px-4">
+            {optionsList.map((option)=>
+              <Link
+               to={option.linkTo}
+               className="rounded px-3 py-2 hover:bg-background hover:text-accent transition-colors"
+             >
+               {option.linkText}
+             </Link>
+            )}
+          </div>
         </nav>
-      }
+      )}
 
       <div className="flex-1 relative">
-        <div className="absolute top-0 left-0 right-0 h-12 w-full bg-black text-white border-b flex items-center justify-between px-4 z-10">
-          <button className="p-2 hover:bg-gray-200 rounded-md cursor-pointer bg-white" onClick={handleToggle}>
+        <header className="fixed top-0 left-0 right-0 h-12 bg-header text-white border-b border-zinc-800 flex items-center justify-between px-4 z-50">
+          <button
+            onClick={() => setIsSidebarOpen((prev) => !prev)}
+            className="p-2 rounded-md hover:bg-zinc-800 transition-colors cursor-pointer"
+          >
             <svg
-              className="w-6 h-6 text-gray-700"
+              className="w-5 h-5 text-zinc-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 strokeLinecap="round"
@@ -35,15 +59,14 @@ export default function AppChrome() {
             </svg>
           </button>
 
-          <div className="font-mono text-sm">
+          <div className="font-mono text-sm text-zinc-300 right-0">
             sanjay@portfolio:~$ currently_learning go
           </div>
 
-       
-        </div>
+   
+        </header>
 
-
-        <main className="pt-12 p-8">
+        <main className="max-w-3xl mx-auto px-8 pt-24 pb-16">
           <Outlet />
         </main>
       </div>

@@ -7,7 +7,7 @@ import Home from './components/Home'
 
 function App() {
   return (
-    <main className="font-mono">
+    <main className="font-mono bg-background">
       <BrowserRouter>
        <Routes>
       <Route element={<AppChrome />}>
