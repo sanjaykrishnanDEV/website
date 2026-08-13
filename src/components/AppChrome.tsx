@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { useTheme } from '../Providers/ThemeProvider'
 
 export default function AppChrome() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -17,10 +18,16 @@ export default function AppChrome() {
       linkText : "About"
     },
     {
+      linkTo : "/projects",
+      linkText : "Projects"
+    },
+    {
       linkTo : "/resume",
       linkText : "Resume"
     }
   ]
+  const {toggleTheme} = useTheme()
+
   return (
     <div className="flex min-h-screen bg-background text-text">
       {isSidebarOpen && (
@@ -59,7 +66,9 @@ export default function AppChrome() {
             </svg>
           </button>
 
-          <div className="font-mono text-sm text-zinc-300 right-0">
+          <div
+           onClick={toggleTheme}
+           className="font-mono text-sm text-info right-0 cursor-pointer">
             sanjay@portfolio:~$ currently_learning go
           </div>
 

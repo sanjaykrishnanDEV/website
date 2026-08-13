@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-background: #f7f6f3;
@@ -6,4 +7,15 @@
   --color-accent: #AC4142;
   --color-header: #111111;
   --color-sidebar: #fcfcfb;
+  --color-info: #ffffff;;
+}
+
+
+:root[data-theme="dark"] {
+  --color-background: #141312;
+  --color-text: #ffffff;
+  --color-accent: #d05a5c;
+  --color-header: #0d0d0c;
+  --color-sidebar: #1b1a18;
+  --color-info: #15c77d;
 }
